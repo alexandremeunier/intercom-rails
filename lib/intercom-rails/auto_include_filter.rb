@@ -32,7 +32,9 @@ module IntercomRails
       end
 
       def include_javascript!
-        response.body = response.body.gsub(CLOSING_BODY_TAG) {|s| intercom_script_tag.to_s + s }
+        response.body = response.body.gsub(CLOSING_BODY_TAG) do |s|
+          intercom_script_tag.to_s + s.html_safe
+        end
       end
 
       def include_javascript?
